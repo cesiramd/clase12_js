@@ -35,7 +35,7 @@ $( document ). ready( function(){
           geometry.computeFlatVertexNormals();
           nodo.position.x = -( width/2 ) + i;
           nodo.position.y = -( height/2 ) + j;
-          nodo.position.z = -( depth/2 ) + j;
+          nodo.position.z = -( depth/2 ) + k;
           mallaI.add( nodo );
 
           let geometry2 = new THREE.SphereGeometry( 0.3, 0 );
@@ -44,7 +44,7 @@ $( document ). ready( function(){
           geometry2.computeFlatVertexNormals();
           nodo2.position.x = -( width/2 ) + i;
           nodo2.position.y = -( height/2 ) + j;
-          nodo2.position.z = -( depth/2 ) + j;
+          nodo2.position.z = -( depth/2 ) + k;
           mallaD.add( nodo2 );
       }
     }
@@ -54,7 +54,7 @@ $( document ). ready( function(){
       requestAnimationFrame( animate );
       renderer.render( scene, camera );
 
-      mallaI.children[ counter ].material.color.r = 1.0;
+      mallaI.children[ counter ].material.color.r = 0.5;
 
       if ( counter > 0 ){
       mallaI.children[ counter - 1 ].material.color.r = 0.0;
@@ -87,17 +87,17 @@ $( document ). ready( function(){
         counter = 0;
       }
 
-      mallaI.rotation.y += 0.005;
-      mallaD.rotation.y -= 0.005;
-      mallaI.rotation.x += 0.005;
-      mallaD.rotation.x -= 0.005;
+      mallaI.rotation.y += 0.001;
+    //  mallaD.rotation.y -= 0.005;
+      //mallaI.rotation.x += 0.005;
+    //  mallaD.rotation.x -= 0.005;
     }
     animate();
 
 
 $ ( document ).keyup( function ( e ){
 
-  if ( e.key == "ArrowRight" && counter_2 >= 0 && counter_2 <=( mallaI.children.length -1 ) ){
+  if ( e.key == "ArrowRight" && counter_2 >= 0 && counter_2 <=( mallaI.children.length - 1 ) ){
     counter_2++;
   }
   if ( e.key == "ArrowLeft" && counter_2 > 0 ){
@@ -105,15 +105,18 @@ $ ( document ).keyup( function ( e ){
   }
 
   for( let i = 0; i < mallaI.children.length; i++){
-    mallaI.children[ counter_2 ].scale.x = 2.5
-    mallaI.children[ counter_2 ].scale.y = 2.5
-    mallaI.children[ counter_2 ].scale.z = 2.5
+    mallaI.children[ i ].scale.x = 1;
+    mallaI.children[ i ].scale.y = 1;
+    mallaI.children[ i ].scale.z = 1;
     mallaI.children[ i ].verticesNeedUpdate;
+    mallaI.children[ i ].material.color.r = 0.0;
   }
 
   mallaI.children[ counter_2 ].scale.x = 2.5
   mallaI.children[ counter_2 ].scale.y = 2.5
   mallaI.children[ counter_2 ].scale.z = 2.5
+  mallaI.children[ counter_2 ].verticesNeedUpdate;
+  mallaI.children[ counter_2 ].material.color.r = 1.0;
 
   });
 
